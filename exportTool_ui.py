@@ -16,10 +16,11 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QPushButton, QSizePolicy, QStatusBar,
-    QTableWidget, QTableWidgetItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QGroupBox, QHeaderView, QLabel, QLineEdit,
+    QMainWindow, QMenu, QMenuBar, QPushButton,
+    QRadioButton, QSizePolicy, QStatusBar, QTableWidget,
+    QTableWidgetItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -38,58 +39,58 @@ class Ui_MainWindow(object):
         self.testConnectionPushButton.setGeometry(QRect(30, 170, 81, 24))
         self.testConnectionPushButton.setStyleSheet(u"background-color: rgb(85, 170, 255);\n"
 "color: rgb(255, 255, 255);")
-        self.widget = QWidget(self.dbSettingsFrame)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(30, 20, 381, 136))
-        self.gridLayout = QGridLayout(self.widget)
+        self.layoutWidget = QWidget(self.dbSettingsFrame)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(30, 20, 381, 136))
+        self.gridLayout = QGridLayout(self.layoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.serverLabel = QLabel(self.widget)
+        self.serverLabel = QLabel(self.layoutWidget)
         self.serverLabel.setObjectName(u"serverLabel")
 
         self.gridLayout.addWidget(self.serverLabel, 0, 0, 1, 1)
 
-        self.serverLineEdit = QLineEdit(self.widget)
+        self.serverLineEdit = QLineEdit(self.layoutWidget)
         self.serverLineEdit.setObjectName(u"serverLineEdit")
 
         self.gridLayout.addWidget(self.serverLineEdit, 0, 1, 1, 1)
 
-        self.portLabel = QLabel(self.widget)
+        self.portLabel = QLabel(self.layoutWidget)
         self.portLabel.setObjectName(u"portLabel")
 
         self.gridLayout.addWidget(self.portLabel, 1, 0, 1, 1)
 
-        self.portLineEdit = QLineEdit(self.widget)
+        self.portLineEdit = QLineEdit(self.layoutWidget)
         self.portLineEdit.setObjectName(u"portLineEdit")
 
         self.gridLayout.addWidget(self.portLineEdit, 1, 1, 1, 1)
 
-        self.databaseLabel = QLabel(self.widget)
+        self.databaseLabel = QLabel(self.layoutWidget)
         self.databaseLabel.setObjectName(u"databaseLabel")
 
         self.gridLayout.addWidget(self.databaseLabel, 2, 0, 1, 1)
 
-        self.databaseLineEdit = QLineEdit(self.widget)
+        self.databaseLineEdit = QLineEdit(self.layoutWidget)
         self.databaseLineEdit.setObjectName(u"databaseLineEdit")
 
         self.gridLayout.addWidget(self.databaseLineEdit, 2, 1, 1, 1)
 
-        self.userNameLabel = QLabel(self.widget)
+        self.userNameLabel = QLabel(self.layoutWidget)
         self.userNameLabel.setObjectName(u"userNameLabel")
 
         self.gridLayout.addWidget(self.userNameLabel, 3, 0, 1, 1)
 
-        self.userNameLineEdit = QLineEdit(self.widget)
+        self.userNameLineEdit = QLineEdit(self.layoutWidget)
         self.userNameLineEdit.setObjectName(u"userNameLineEdit")
 
         self.gridLayout.addWidget(self.userNameLineEdit, 3, 1, 1, 1)
 
-        self.passwordLabel = QLabel(self.widget)
+        self.passwordLabel = QLabel(self.layoutWidget)
         self.passwordLabel.setObjectName(u"passwordLabel")
 
         self.gridLayout.addWidget(self.passwordLabel, 4, 0, 1, 1)
 
-        self.passwordLineEdit = QLineEdit(self.widget)
+        self.passwordLineEdit = QLineEdit(self.layoutWidget)
         self.passwordLineEdit.setObjectName(u"passwordLineEdit")
 
         self.gridLayout.addWidget(self.passwordLineEdit, 4, 1, 1, 1)
@@ -97,15 +98,12 @@ class Ui_MainWindow(object):
         self.dbSettingsLabel = QLabel(self.centralwidget)
         self.dbSettingsLabel.setObjectName(u"dbSettingsLabel")
         self.dbSettingsLabel.setGeometry(QRect(30, 10, 171, 16))
-        self.viewNameLineEdit = QLineEdit(self.centralwidget)
-        self.viewNameLineEdit.setObjectName(u"viewNameLineEdit")
-        self.viewNameLineEdit.setGeometry(QRect(30, 280, 311, 22))
-        self.viewNameLabel = QLabel(self.centralwidget)
-        self.viewNameLabel.setObjectName(u"viewNameLabel")
-        self.viewNameLabel.setGeometry(QRect(30, 260, 101, 16))
+        self.objectNameLabel = QLabel(self.centralwidget)
+        self.objectNameLabel.setObjectName(u"objectNameLabel")
+        self.objectNameLabel.setGeometry(QRect(210, 260, 101, 16))
         self.exportPushButton = QPushButton(self.centralwidget)
         self.exportPushButton.setObjectName(u"exportPushButton")
-        self.exportPushButton.setGeometry(QRect(460, 280, 101, 24))
+        self.exportPushButton.setGeometry(QRect(640, 280, 101, 24))
         self.exportPushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);\n"
 "color: rgb(255, 255, 255);")
         self.perviewTableWidget = QTableWidget(self.centralwidget)
@@ -113,12 +111,39 @@ class Ui_MainWindow(object):
         self.perviewTableWidget.setGeometry(QRect(30, 330, 761, 211))
         self.getDataPushButton = QPushButton(self.centralwidget)
         self.getDataPushButton.setObjectName(u"getDataPushButton")
-        self.getDataPushButton.setGeometry(QRect(350, 280, 101, 24))
+        self.getDataPushButton.setGeometry(QRect(530, 280, 101, 24))
         self.getDataPushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
 "color: rgb(255, 255, 255);")
         self.previewLabel = QLabel(self.centralwidget)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(30, 310, 81, 16))
+        self.objectTypeComboBox = QComboBox(self.centralwidget)
+        self.objectTypeComboBox.setObjectName(u"objectTypeComboBox")
+        self.objectTypeComboBox.setGeometry(QRect(30, 280, 161, 24))
+        self.objectNameComboBox = QComboBox(self.centralwidget)
+        self.objectNameComboBox.setObjectName(u"objectNameComboBox")
+        self.objectNameComboBox.setGeometry(QRect(210, 280, 301, 24))
+        self.objectTypeLabel = QLabel(self.centralwidget)
+        self.objectTypeLabel.setObjectName(u"objectTypeLabel")
+        self.objectTypeLabel.setGeometry(QRect(30, 260, 161, 16))
+        self.groupBox = QGroupBox(self.centralwidget)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setGeometry(QRect(470, 10, 321, 231))
+        self.radioButton = QRadioButton(self.groupBox)
+        self.radioButton.setObjectName(u"radioButton")
+        self.radioButton.setGeometry(QRect(20, 40, 92, 20))
+        self.radioButton_2 = QRadioButton(self.groupBox)
+        self.radioButton_2.setObjectName(u"radioButton_2")
+        self.radioButton_2.setGeometry(QRect(20, 70, 92, 20))
+        self.radioButton_3 = QRadioButton(self.groupBox)
+        self.radioButton_3.setObjectName(u"radioButton_3")
+        self.radioButton_3.setGeometry(QRect(20, 100, 92, 20))
+        self.radioButton_4 = QRadioButton(self.groupBox)
+        self.radioButton_4.setObjectName(u"radioButton_4")
+        self.radioButton_4.setGeometry(QRect(20, 130, 92, 20))
+        self.lineEdit = QLineEdit(self.groupBox)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setGeometry(QRect(80, 130, 113, 22))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -151,11 +176,16 @@ class Ui_MainWindow(object):
         self.passwordLabel.setText(QCoreApplication.translate("MainWindow", u"Salasana", None))
         self.passwordLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"K\u00e4ytt\u00e4j\u00e4n salasana", None))
         self.dbSettingsLabel.setText(QCoreApplication.translate("MainWindow", u"Tietokantayhteyden asetukset", None))
-        self.viewNameLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Tietokannan n\u00e4kym\u00e4n nimi, jonka tiedot vied\u00e4\u00e4n", None))
-        self.viewNameLabel.setText(QCoreApplication.translate("MainWindow", u"N\u00e4kym\u00e4n nimi", None))
+        self.objectNameLabel.setText(QCoreApplication.translate("MainWindow", u"Objektin nimi", None))
         self.exportPushButton.setText(QCoreApplication.translate("MainWindow", u"Vie tiedostoon", None))
         self.getDataPushButton.setText(QCoreApplication.translate("MainWindow", u"Hae", None))
         self.previewLabel.setText(QCoreApplication.translate("MainWindow", u"Esikatselu", None))
+        self.objectTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Objektin tyyppi", None))
+        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Sarake-erotin CSV-tiedostossa", None))
+        self.radioButton.setText(QCoreApplication.translate("MainWindow", u"pilkku (,)", None))
+        self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"puolipiste (;)", None))
+        self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"Sarkain", None))
+        self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"Muu", None))
         self.menuOhje.setTitle(QCoreApplication.translate("MainWindow", u"Ohje", None))
     # retranslateUi
 

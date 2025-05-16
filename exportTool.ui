@@ -46,7 +46,7 @@ color: rgb(255, 255, 255);</string>
       <string>Testaa yhteys</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -142,36 +142,23 @@ color: rgb(255, 255, 255);</string>
      <string>Tietokantayhteyden asetukset</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="viewNameLineEdit">
+   <widget class="QLabel" name="objectNameLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>280</y>
-      <width>311</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>Tietokannan näkymän nimi, jonka tiedot viedään</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="viewNameLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
+      <x>210</x>
       <y>260</y>
       <width>101</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Näkymän nimi</string>
+     <string>Objektin nimi</string>
     </property>
    </widget>
    <widget class="QPushButton" name="exportPushButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>640</x>
       <y>280</y>
       <width>101</width>
       <height>24</height>
@@ -198,7 +185,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="getDataPushButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>530</x>
       <y>280</y>
       <width>101</width>
       <height>24</height>
@@ -224,6 +211,114 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Esikatselu</string>
     </property>
+   </widget>
+   <widget class="QComboBox" name="objectTypeComboBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>280</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="objectNameComboBox">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>280</y>
+      <width>301</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="objectTypeLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>260</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Objektin tyyppi</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>10</y>
+      <width>321</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Sarake-erotin CSV-tiedostossa</string>
+    </property>
+    <widget class="QRadioButton" name="radioButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>92</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>pilkku (,)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>92</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>puolipiste (;)</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>92</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sarkain</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>92</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Muu</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>130</y>
+       <width>113</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
