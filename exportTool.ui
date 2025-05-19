@@ -172,7 +172,7 @@ color: rgb(255, 255, 255);</string>
      <string>Vie tiedostoon</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="perviewTableWidget">
+   <widget class="QTableWidget" name="previewTableWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -180,23 +180,6 @@ color: rgb(255, 255, 255);</string>
       <width>761</width>
       <height>211</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="getDataPushButton">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>280</y>
-      <width>101</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 170, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Hae</string>
     </property>
    </widget>
    <widget class="QLabel" name="previewLabel">
@@ -319,6 +302,23 @@ color: rgb(255, 255, 255);</string>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="getDataPushButton">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>280</y>
+      <width>101</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 170, 0);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Hae tiedot</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

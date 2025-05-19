@@ -106,14 +106,9 @@ class Ui_MainWindow(object):
         self.exportPushButton.setGeometry(QRect(640, 280, 101, 24))
         self.exportPushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);\n"
 "color: rgb(255, 255, 255);")
-        self.perviewTableWidget = QTableWidget(self.centralwidget)
-        self.perviewTableWidget.setObjectName(u"perviewTableWidget")
-        self.perviewTableWidget.setGeometry(QRect(30, 330, 761, 211))
-        self.getDataPushButton = QPushButton(self.centralwidget)
-        self.getDataPushButton.setObjectName(u"getDataPushButton")
-        self.getDataPushButton.setGeometry(QRect(530, 280, 101, 24))
-        self.getDataPushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
-"color: rgb(255, 255, 255);")
+        self.previewTableWidget = QTableWidget(self.centralwidget)
+        self.previewTableWidget.setObjectName(u"previewTableWidget")
+        self.previewTableWidget.setGeometry(QRect(30, 330, 761, 211))
         self.previewLabel = QLabel(self.centralwidget)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(30, 310, 81, 16))
@@ -144,6 +139,11 @@ class Ui_MainWindow(object):
         self.lineEdit = QLineEdit(self.groupBox)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(80, 130, 113, 22))
+        self.getDataPushButton = QPushButton(self.centralwidget)
+        self.getDataPushButton.setObjectName(u"getDataPushButton")
+        self.getDataPushButton.setGeometry(QRect(530, 280, 101, 24))
+        self.getDataPushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
+"color: rgb(255, 255, 255);")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -178,7 +178,6 @@ class Ui_MainWindow(object):
         self.dbSettingsLabel.setText(QCoreApplication.translate("MainWindow", u"Tietokantayhteyden asetukset", None))
         self.objectNameLabel.setText(QCoreApplication.translate("MainWindow", u"Objektin nimi", None))
         self.exportPushButton.setText(QCoreApplication.translate("MainWindow", u"Vie tiedostoon", None))
-        self.getDataPushButton.setText(QCoreApplication.translate("MainWindow", u"Hae", None))
         self.previewLabel.setText(QCoreApplication.translate("MainWindow", u"Esikatselu", None))
         self.objectTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Objektin tyyppi", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Sarake-erotin CSV-tiedostossa", None))
@@ -186,6 +185,7 @@ class Ui_MainWindow(object):
         self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"puolipiste (;)", None))
         self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"Sarkain", None))
         self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"Muu", None))
+        self.getDataPushButton.setText(QCoreApplication.translate("MainWindow", u"Hae tiedot", None))
         self.menuOhje.setTitle(QCoreApplication.translate("MainWindow", u"Ohje", None))
     # retranslateUi
 
