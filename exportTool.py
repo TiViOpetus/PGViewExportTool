@@ -60,17 +60,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.ui.testConnectionPushButton.clicked.connect(self.connectDb)
         
-        # TODO: Kun poistutaan objektityypin valinnasta, haetaan tyypin objketilista
-        # ja päivitetään objektin nimi -valinnat ISSUE 13
+        # Kun poistutaan objektityypin valinnasta, haetaan tyypin objketilista
+        # ja päivitetään objektin nimi -valinnat 
         self.ui.objectTypeComboBox.currentIndexChanged.connect(self.getObjectNames)
 
 
         # TODO: Kun poistutaan / valinta on muuttunut objektilistasta 
         # näyteään päivitetään esikatselu ja näytetään Tallenna-painike
-        self.ui.getDataPushButton.clicked.connect(self.updatePreview)
+        self.ui.objectNameComboBox.currentIndexChanged.connect(self.updatePreview)
+        # self.ui.getDataPushButton.clicked.connect(self.updatePreview)
 
         # TODO: Tallennuspainikkeen painaminen käynnistää tallennusdialogin ISSUE 9
-
+        self.ui.exportPushButton.clicked.connect(self.saveToCSVFile)
         
    
    
@@ -143,7 +144,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             filterText  = f"table_type = '{tableType}' AND table_schema NOT IN ('information_schema', 'pg_catalog')"
 
-            objectNames = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
+            objectNames = dbConnection.filterColumsFromTable(table,columns,filterText)
             self.ui.statusbar.showMessage('Haettiin tietokantaobjektien nimet')
             
             print(objectNames)
@@ -179,44 +180,58 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         # Luetaan valitun tietokantaobjektin skeema ja nimi
         currentObjectSelection = self.ui.objectNameComboBox.currentText()
+        print('Valittu objekti on', currentObjectSelection)
+
+        if currentObjectSelection == 'Valitse' or currentObjectSelection == '' :
+            self.ui.previewTableWidget.clear()
+            self.ui.previewTableWidget.setColumnCount(0)
+            self.ui.previewTableWidget.setRowCount(0)
+        else:
+            # Luodaan tietokantayhteysolio
+            try:
+                dbConnection = dbOperations.DbConnection(settingsDictionary)
+                self.resultSet = dbConnection.readAllColumnsFromTable(currentObjectSelection)
+                print(self.resultSet)
         
-        # Luodaan tietokantayhteysolio
-        try:
-            dbConnection = dbOperations.DbConnection(settingsDictionary)
-            self.resultSet = dbConnection.readAllColumnsFromTable(currentObjectSelection)
-            print(self.resultSet)
-    
-        except:
-            pass
+            except:
+                pass
         
 
-        # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
-        self.ui.previewTableWidget.clear()
+            # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
+            self.ui.previewTableWidget.clear()
 
-        # Määritellään taulukkoelementin otsikot
-        try:
-            # Tulosjoukon rivimäärä
-            numberOfRows = len(self.resultSet)
-            self.ui.previewTableWidget.setRowCount(numberOfRows)
+            # Määritellään taulukkoelementin otsikot
+            try:
+                # Tulosjoukon rivimäärä
+                numberOfRows = len(self.resultSet)
+                self.ui.previewTableWidget.setRowCount(numberOfRows)
 
-            # Tulosjoukon sarakemäärä
-            columnCount = len(self.resultSet[0])
-            self.ui.previewTableWidget.setColumnCount(columnCount)
-            dbConnection = dbOperations.DbConnection(settingsDictionary)
-            headerRow = dbConnection.getColumnNames(currentObjectSelection)
-            self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
-        
-        except Exception as e:
-            raise e
-        
-        # Asetetaan taulukon solujen arvot
-        for row in range(numberOfRows): # Luetaan listaa riveittäin
-            for column in range(len(self.resultSet[row])): # Luetaan monikkoa sarakkeittain
+                # Tulosjoukon sarakemäärä
                 
-                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
-                data = QtWidgets.QTableWidgetItem(str(self.resultSet[row][column])) 
-                self.ui.previewTableWidget.setItem(row, column, data)
+                columnCount = len(self.resultSet[0])
+                self.ui.previewTableWidget.setColumnCount(columnCount)
+                dbConnection = dbOperations.DbConnection(settingsDictionary)
+                headerRow = dbConnection.getColumnNames(currentObjectSelection)
                 self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
+            
+            except Exception as e:
+                raise e
+            
+            # Asetetaan taulukon solujen arvot
+            for row in range(numberOfRows): # Luetaan listaa riveittäin
+                for column in range(len(self.resultSet[row])): # Luetaan monikkoa sarakkeittain
+                    
+                    # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                    data = QtWidgets.QTableWidgetItem(str(self.resultSet[row][column])) 
+                    self.ui.previewTableWidget.setItem(row, column, data)
+                    self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
+    
+    # Tallennus CSV-tiedostoksi
+    def saveToCSVFile(self):
+        csvFileName = QtWidgets.QFileDialog.getSaveFileName(self, "Save File",()
+                           "/home/jana/untitled.png",
+                           ("Erotellut tiedostot (*.csv *.tsv *.txt)"))
+        print(csvFileName)
 
     # Virheilmoitusdialogi
     def openWarning(self):
