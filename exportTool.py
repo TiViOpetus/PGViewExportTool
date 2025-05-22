@@ -51,6 +51,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.errorText = ""
         self.errorDetails = ""
 
+        # Oletustallennushakemisto
+        self.defaultFolder = f'{os.path.expanduser('~')}\\Documents\\'
+
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
 
@@ -180,8 +183,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         # Luetaan valitun tietokantaobjektin skeema ja nimi
         currentObjectSelection = self.ui.objectNameComboBox.currentText()
-        print('Valittu objekti on', currentObjectSelection)
 
+        # Nollataan taulukko tyhjäksi
         if currentObjectSelection == 'Valitse' or currentObjectSelection == '' :
             self.ui.previewTableWidget.clear()
             self.ui.previewTableWidget.setColumnCount(0)
@@ -207,14 +210,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.ui.previewTableWidget.setRowCount(numberOfRows)
 
                 # Tulosjoukon sarakemäärä
-                
                 columnCount = len(self.resultSet[0])
                 self.ui.previewTableWidget.setColumnCount(columnCount)
                 dbConnection = dbOperations.DbConnection(settingsDictionary)
+
+                # Selvitetään sarakeotsikot ja päivitetään muuttujat
                 headerRow = dbConnection.getColumnNames(currentObjectSelection)
+                self.columnNamesList = headerRow
                 self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
             
             except Exception as e:
+                # TODO: Kutsu virhedialogia
                 raise e
             
             # Asetetaan taulukon solujen arvot
@@ -226,12 +232,41 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.ui.previewTableWidget.setItem(row, column, data)
                     self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
     
+
+    def createCSVdata(self, separator=';', textIdentifier='"'):
+        headerRow = ''
+        for item in self.columnNamesList:
+            headerRow = headerRow + item + separator
+        headerRow = headerRow + '\\n'
+        self.columnNamesList
+        dataRows = self.resultSet
+        
+
+        print('Otsikot:', headerRow)
+        # print('Data', dataRows)
+
     # Tallennus CSV-tiedostoksi
     def saveToCSVFile(self):
-        csvFileName = QtWidgets.QFileDialog.getSaveFileName(self, "Save File",()
-                           "/home/jana/untitled.png",
-                           ("Erotellut tiedostot (*.csv *.tsv *.txt)"))
-        print(csvFileName)
+        
+        # Avataan tallennusdialogi oletuskanisona on käyttäjän tiedostot-kansio
+        defaultFileName = f'{self.defaultFolder}{self.ui.objectNameComboBox.currentText()}'
+        csvFileNameAndType = QtWidgets.QFileDialog.getSaveFileName(self, "Tallenna tiedosto",
+                           defaultFileName,
+                           ("CSV files (*.csv);;TSV files (*.tsv);;Text files (*.txt)"))
+ 
+        # Otetaan monikosta polku ja tiedoston nimi
+        csvFileName = csvFileNameAndType[0]
+
+        data = f"'Erkki'; 'Esimerkki'; 55 \\n"
+
+        # Avataan tiedosto kirjoittamista varten
+        self.createCSVdata(';', '"')
+        with open(csvFileName, 'wt') as fileToWrite:
+            fileToWrite.write(data)
+
+        # Nollataan tiedot onnistuneen tallennuksen jälkeen
+        self.resultSet = []
+        self.columnNamesList = []
 
     # Virheilmoitusdialogi
     def openWarning(self):
