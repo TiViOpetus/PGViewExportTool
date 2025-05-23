@@ -234,7 +234,7 @@ color: rgb(255, 255, 255);</string>
      <string>Objektin tyyppi</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="separotorGroupBox">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -246,7 +246,7 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Sarake-erotin </string>
     </property>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="commaRadioButton">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -259,7 +259,7 @@ color: rgb(255, 255, 255);</string>
       <string>pilkku (,)</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="semicolonRadioButton">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -271,8 +271,11 @@ color: rgb(255, 255, 255);</string>
      <property name="text">
       <string>puolipiste (;)</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="tabRadioButton">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -285,7 +288,7 @@ color: rgb(255, 255, 255);</string>
       <string>Sarkain</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_4">
+    <widget class="QRadioButton" name="otherSeparatorRadioButton">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -298,7 +301,7 @@ color: rgb(255, 255, 255);</string>
       <string>Muu</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="separatorLineEdit">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -307,9 +310,12 @@ color: rgb(255, 255, 255);</string>
        <height>22</height>
       </rect>
      </property>
+     <property name="text">
+      <string>mmmmm</string>
+     </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="qualifierGroupBox">
     <property name="geometry">
      <rect>
       <x>630</x>
@@ -321,7 +327,7 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Tekstin tunniste</string>
     </property>
-    <widget class="QRadioButton" name="radioButton_5">
+    <widget class="QRadioButton" name="doubleQuotationmarkRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -334,7 +340,7 @@ color: rgb(255, 255, 255);</string>
       <string>lainausmerkit (&quot;)</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_6">
+    <widget class="QRadioButton" name="quotationmarkRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -347,40 +353,40 @@ color: rgb(255, 255, 255);</string>
       <string>Puolilainausmerkit (')</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_7">
+    <widget class="QLineEdit" name="qualifierLineEdit">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>141</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Ei mitään</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
+       <x>100</x>
        <y>120</y>
        <width>31</width>
        <height>22</height>
       </rect>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_8">
+    <widget class="QRadioButton" name="otherQualifierRadioButton">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>120</y>
-       <width>92</width>
+       <y>130</y>
+       <width>61</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
       <string>Muu</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="withoutRadioButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>92</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ei mitään</string>
      </property>
     </widget>
    </widget>

@@ -54,6 +54,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Oletustallennushakemisto
         self.defaultFolder = f'{os.path.expanduser('~')}\\Documents\\'
 
+        # Käyttäjän valitsemant CSV-asetukset
+        self.chosenSeparator = ';'
+        self.chosenQualifier = ''
+
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
 
@@ -75,6 +79,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tallennuspainikkeen painaminen käynnistää tallennusdialogin ISSUE 9
         self.ui.exportPushButton.clicked.connect(self.saveToCSVFile)
+
+        # Erottimen valinnan signaalit
+        self.ui.commaRadioButton.clicked.connect(self.setSeparator)
+        self.ui.semicolonRadioButton.clicked.connect(self.setSeparator)
+        self.ui.tabRadioButton.clicked.connect(self.setSeparator)
+        self.ui.otherSeparatorRadioButton.clicked.connect(self.setSeparator)
+        self.ui.separatorLineEdit.textChanged.connect(self.forceOtherSeparator)
+
+        # Tekstin tunnistimen valinnan signaalit
+        self.ui.withoutRadioButton.clicked.connect(self.setQualifier)
+        self.ui.quotationmarkRadioButton.clicked.connect(self.setQualifier)
+        self.ui.doubleQuotationmarkRadioButton.clicked.connect(self.setQualifier)
+        self.ui.otherQualifierRadioButton.clicked.connect(self.setQualifier)
+        self.ui.qualifierLineEdit.textChanged.connect(self.forceOtherQualifier)
         
    
    
@@ -228,9 +246,47 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.ui.previewTableWidget.setItem(row, column, data)
                     self.ui.previewTableWidget.setHorizontalHeaderLabels(headerRow)
     
+    # Aktivoidaan muu erotin -valinta, jos erotin-kenttää on muokattu
+    def forceOtherSeparator(self):
+        self.ui.otherSeparatorRadioButton.setChecked(True)
 
-    def createCSVdata(self, separator=';', textIdentifier='"'):
+    # Aktivoidaan muu tekstin tunniste -valinta, jos tunniste-kenttää on muokattu
+    def forceOtherQualifier(self):
+        self.ui.otherQualifierRadioButton.setChecked(True)
 
+    # Selvitetään, minkä erottimen käyttäjä on valinnut
+    def setSeparator(self):
+        if self.ui.commaRadioButton.isChecked() == True:
+            self.chosenSeparator = ','
+        if self.ui.semicolonRadioButton.isChecked() == True:
+            self.chosenSeparator = ';'
+        if self.ui.tabRadioButton.isChecked() == True:
+            self.chosenSeparator = '\t'
+        if self.ui.otherSeparatorRadioButton.isChecked() == True:
+            self.chosenSeparator = self.ui.separatorLineEdit.text().strip()
+
+        statusbarMessage = f'Erottimeksi valittu {self.chosenSeparator}'
+        self.ui.statusbar.showMessage(statusbarMessage, 5000)
+
+    # Selvitetään, minkä tekstin tunnistimen käyttäjä on valinnut
+    def setQualifier(self):
+        if self.ui.withoutRadioButton.isChecked() == True:
+            self.chosenQualifier = ''
+
+        if self.ui.doubleQuotationmarkRadioButton.isChecked() == True:
+            self.chosenQualifier = '"'
+
+        if self.ui.quotationmarkRadioButton.isChecked() == True:
+            self.chosenQualifier = "'"
+
+        if self.ui.otherQualifierRadioButton.isChecked() == True:
+            self.chosenQualifier = self.ui.qualifierLineEdit.text().strip()
+
+        statusbarMessage = f'Tekstin tunnisteeksi valittu {self.chosenQualifier}'
+        self.ui.statusbar.showMessage(statusbarMessage, 5000)
+
+    def createCSVdata(self, separator=';', textQualifier='"'):
+        data = ''
         # Luodaan CSV-tiedoston otsikot
         headerRow = ''
         for item in self.columnNamesList:
@@ -243,17 +299,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dataRows = ''
         dataRow = ''
         for row in self.resultSet:
-            print('Rivi', row)
             for columnValue in row:
-                print('Sarake', columnValue)
+                isString = isinstance(columnValue, str)
+                if isString == True:
+                    columnValue = f'{self.chosenQualifier}{columnValue}{self.chosenQualifier}'
                 columnValue = str(columnValue)
                 dataRow = dataRow + columnValue + separator
             dataRow = dataRow[:-1]
             dataRows = dataRows + dataRow + '\\n'
-        
-
-        print('Otsikot:', headerRow)
-        print('Data', dataRows)
+        data = headerRow + dataRows
+        return data
 
     # Tallennus CSV-tiedostoksi
     def saveToCSVFile(self):
@@ -267,10 +322,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Otetaan monikosta polku ja tiedoston nimi
         csvFileName = csvFileNameAndType[0]
 
-        data = f"'Erkki'; 'Esimerkki'; 55 \\n"
+        
 
         # Avataan tiedosto kirjoittamista varten
-        self.createCSVdata(';', '"')
+
+        data = self.createCSVdata(self.chosenSeparator, self.chosenQualifier)
         with open(csvFileName, 'wt') as fileToWrite:
             fileToWrite.write(data)
 
