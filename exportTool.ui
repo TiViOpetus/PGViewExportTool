@@ -145,7 +145,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="objectNameLabel">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>490</x>
       <y>260</y>
       <width>101</width>
       <height>16</height>
@@ -204,7 +204,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="objectTypeComboBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>320</x>
       <y>280</y>
       <width>161</width>
       <height>24</height>
@@ -214,7 +214,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="objectNameComboBox">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>490</x>
       <y>280</y>
       <width>301</width>
       <height>24</height>
@@ -224,7 +224,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="objectTypeLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>320</x>
       <y>260</y>
       <width>161</width>
       <height>16</height>
@@ -392,6 +392,29 @@ color: rgb(255, 255, 255);</string>
       <string>ei mitään</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QComboBox" name="databaseComboBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>280</y>
+      <width>281</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="chooseDbLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>260</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tietokanta</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
