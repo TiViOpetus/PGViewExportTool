@@ -70,6 +70,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # päivtetään objektityypin valinnat. Jos virhe, näyteään msgbox
         # Painike asettaa tietokantaparametrit ja yhteysmerkkijonon
 
+        self.ui.databaseLineEdit.textChanged.connect(self.resetUi)
+
         self.ui.testConnectionPushButton.clicked.connect(self.connectDb)
         self.ui.databaseComboBox.currentIndexChanged.connect(self.getObjectTypesFromDbCombo)
         
@@ -104,12 +106,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
    
     # OHJELMOIDUT SLOTIT
     # ------------------
+    def resetUi(self):
+        self.ui.databaseComboBox.clear()
+        
+
     def connectDb(self):
         # Päivitetään tietokantaan liittyvät ominaisuudet syötettyjen tietojen perusteella
         self.serverName = self.ui.serverLineEdit.text()
         self.portNumber = self.ui.portLineEdit.text()
         self.userName = self.ui.userNameLineEdit.text()
         self.password = self.ui.passwordLineEdit.text()
+
+        # self.resetTypeAndName()
 
         # Tarkistetaan onko valittuna järjestelmätietokanta postgres
         if self.ui.databaseLineEdit.text() == 'postgres':
@@ -236,52 +244,44 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Haetaan tietokantaobjektien tyypit Tietokannan nimi -yhdistelmäruudun perusteella
     def getObjectTypesFromDbCombo(self):
-        chosenDatabaseName = self.ui.databaseComboBox.currentText()
-        # Muodostetaan asetussanakirja
-        settingsDictionary = {'server': self.serverName,
-                      'port': self.portNumber,
-                      'database': chosenDatabaseName,
-                      'userName': self.userName,
-                      'password': self.password}
-        
-         # Luodaan tietokantayhteysolio
-         # Luodaan tietokantayhteysolio
-        try:
-            dbConnection = dbOperations.DbConnection(settingsDictionary)
-            table = 'information_schema.tables'
-            columns = ['table_type']
-            filterText = f"table_schema NOT IN ('information_schema', 'pg_catalog')"
-
-            objectTypes = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
-            self.ui.statusbar.showMessage('Yhteyden muodostus tietokantaan onnistui')
-
-            # Tehdään monikkolistasta merkkijonolista
-            self.ui.objectTypeComboBox.clear() # Tyhjentää vanhat vaihtoehdot
-            cleanedObjectTypeList = ['Valitse']
-            for value in objectTypes:
-                objectType = value[0] # Ottaa monikon ensimmäisen arvon
-                cleanedObjectTypeList.append(objectType)
+        if self.ui.databaseComboBox.currentText() == 'Valitse' or self.ui.databaseComboBox.currentText() == '':
+            pass
+        else:
+            chosenDatabaseName = self.ui.databaseComboBox.currentText()
+            # Muodostetaan asetussanakirja
+            settingsDictionary = {'server': self.serverName,
+                        'port': self.portNumber,
+                        'database': chosenDatabaseName,
+                        'userName': self.userName,
+                        'password': self.password}
             
-            # Lisätään lista yhdistelmäruutuun
-            self.ui.objectTypeComboBox.addItems(cleanedObjectTypeList)
-            print(self.databaseName)
+            # Luodaan tietokantayhteysolio
+            # Luodaan tietokantayhteysolio
+            try:
+                dbConnection = dbOperations.DbConnection(settingsDictionary)
+                table = 'information_schema.tables'
+                columns = ['table_type']
+                filterText = f"table_schema NOT IN ('information_schema', 'pg_catalog')"
 
-        except Exception as e:
-            self.errorWindowTitle = 'Yhteys tietokantaan ei onnistunut'
-            self.errorText = 'Yhteyden muodostuksessa tapahtui virhe'
-            self.errorDetails = str(e)
-            self.openWarning()
-        
+                objectTypes = dbConnection.filterDistinctColumsFromTable(table,columns,filterText)
+                self.ui.statusbar.showMessage('Yhteyden muodostus tietokantaan onnistui')
+
+                # Tehdään monikkolistasta merkkijonolista
+                self.ui.objectTypeComboBox.clear() # Tyhjentää vanhat vaihtoehdot
+                cleanedObjectTypeList = ['Valitse']
+                for value in objectTypes:
+                    objectType = value[0] # Ottaa monikon ensimmäisen arvon
+                    cleanedObjectTypeList.append(objectType)
+                
+                # Lisätään lista yhdistelmäruutuun
+                self.ui.objectTypeComboBox.addItems(cleanedObjectTypeList)
+                print(self.databaseName)
             
-
-         
-        
-        
-        except Exception as e:
-            self.errorWindowTitle = 'Yhteys tietokantaobjektien haku ei onnistunut'
-            self.errorText = 'Objektien nimien haku ei onnistunut'
-            self.errorDetails = str(e)
-            self.openWarning()
+            except Exception as e:
+                self.errorWindowTitle = 'Yhteys tietokantaobjektien haku ei onnistunut'
+                self.errorText = 'Objektien nimien haku ei onnistunut'
+                self.errorDetails = str(e)
+                self.openWarning()
 
 
     def updatePreview(self):
