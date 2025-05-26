@@ -113,7 +113,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tarkistetaan onko valittuna järjestelmätietokanta postgres
         if self.ui.databaseLineEdit.text() == 'postgres':
-            self.databaseName = self.ui.databaseComboBox.currentText()
+            self.databaseName = 'postgres'
         else:
             self.databaseName = self.ui.databaseLineEdit.text()
 
