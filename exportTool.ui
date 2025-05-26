@@ -271,8 +271,11 @@ color: rgb(255, 255, 255);</string>
      <property name="text">
       <string>puolipiste (;)</string>
      </property>
-     <property name="checked">
+     <property name="checkable">
       <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="tabRadioButton">

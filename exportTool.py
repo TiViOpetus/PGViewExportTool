@@ -54,9 +54,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Oletustallennushakemisto
         self.defaultFolder = f'{os.path.expanduser('~')}\\Documents\\'
 
-        # Käyttäjän valitsemant CSV-asetukset
+        # CSV-asetusten oletusarvot
         self.chosenSeparator = ';'
         self.chosenQualifier = ''
+        self.ui.semicolonRadioButton.setChecked(True)
+        self.ui.withoutRadioButton.setChecked(True)
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
