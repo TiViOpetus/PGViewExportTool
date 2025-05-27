@@ -17,10 +17,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QGroupBox, QHeaderView, QLabel, QLineEdit,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QRadioButton, QSizePolicy, QStatusBar, QTableWidget,
-    QTableWidgetItem, QWidget)
+    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QPushButton, QRadioButton, QSizePolicy, QStatusBar,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -36,7 +36,10 @@ class Ui_MainWindow(object):
         self.dbSettingsFrame.setFrameShadow(QFrame.Shadow.Raised)
         self.testConnectionPushButton = QPushButton(self.dbSettingsFrame)
         self.testConnectionPushButton.setObjectName(u"testConnectionPushButton")
-        self.testConnectionPushButton.setGeometry(QRect(30, 170, 81, 24))
+        self.testConnectionPushButton.setGeometry(QRect(30, 170, 81, 31))
+        font = QFont()
+        font.setBold(True)
+        self.testConnectionPushButton.setFont(font)
         self.testConnectionPushButton.setStyleSheet(u"background-color: rgb(85, 170, 255);\n"
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(self.dbSettingsFrame)
@@ -103,11 +106,11 @@ class Ui_MainWindow(object):
         self.objectNameLabel.setGeometry(QRect(490, 260, 101, 16))
         self.exportPushButton = QPushButton(self.centralwidget)
         self.exportPushButton.setObjectName(u"exportPushButton")
-        self.exportPushButton.setGeometry(QRect(550, 210, 161, 51))
-        font = QFont()
-        font.setPointSize(14)
-        font.setBold(True)
-        self.exportPushButton.setFont(font)
+        self.exportPushButton.setGeometry(QRect(630, 200, 161, 51))
+        font1 = QFont()
+        font1.setPointSize(14)
+        font1.setBold(True)
+        self.exportPushButton.setFont(font1)
         self.exportPushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);\n"
 "color: rgb(255, 255, 255);")
         self.previewTableWidget = QTableWidget(self.centralwidget)
@@ -119,53 +122,77 @@ class Ui_MainWindow(object):
         self.objectTypeComboBox = QComboBox(self.centralwidget)
         self.objectTypeComboBox.setObjectName(u"objectTypeComboBox")
         self.objectTypeComboBox.setGeometry(QRect(320, 280, 161, 24))
+        self.objectTypeComboBox.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.objectNameComboBox = QComboBox(self.centralwidget)
         self.objectNameComboBox.setObjectName(u"objectNameComboBox")
         self.objectNameComboBox.setGeometry(QRect(490, 280, 301, 24))
+        self.objectNameComboBox.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.objectTypeLabel = QLabel(self.centralwidget)
         self.objectTypeLabel.setObjectName(u"objectTypeLabel")
         self.objectTypeLabel.setGeometry(QRect(320, 260, 161, 16))
         self.separotorGroupBox = QGroupBox(self.centralwidget)
         self.separotorGroupBox.setObjectName(u"separotorGroupBox")
         self.separotorGroupBox.setGeometry(QRect(470, 20, 151, 171))
-        self.commaRadioButton = QRadioButton(self.separotorGroupBox)
-        self.commaRadioButton.setObjectName(u"commaRadioButton")
-        self.commaRadioButton.setGeometry(QRect(20, 70, 92, 20))
-        self.semicolonRadioButton = QRadioButton(self.separotorGroupBox)
+        self.widget = QWidget(self.separotorGroupBox)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(20, 30, 121, 121))
+        self.verticalLayout = QVBoxLayout(self.widget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.semicolonRadioButton = QRadioButton(self.widget)
         self.semicolonRadioButton.setObjectName(u"semicolonRadioButton")
-        self.semicolonRadioButton.setGeometry(QRect(20, 30, 92, 20))
         self.semicolonRadioButton.setCheckable(True)
         self.semicolonRadioButton.setChecked(False)
-        self.tabRadioButton = QRadioButton(self.separotorGroupBox)
+
+        self.verticalLayout.addWidget(self.semicolonRadioButton)
+
+        self.commaRadioButton = QRadioButton(self.widget)
+        self.commaRadioButton.setObjectName(u"commaRadioButton")
+
+        self.verticalLayout.addWidget(self.commaRadioButton)
+
+        self.tabRadioButton = QRadioButton(self.widget)
         self.tabRadioButton.setObjectName(u"tabRadioButton")
-        self.tabRadioButton.setGeometry(QRect(20, 100, 92, 20))
-        self.otherSeparatorRadioButton = QRadioButton(self.separotorGroupBox)
+
+        self.verticalLayout.addWidget(self.tabRadioButton)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.otherSeparatorRadioButton = QRadioButton(self.widget)
         self.otherSeparatorRadioButton.setObjectName(u"otherSeparatorRadioButton")
-        self.otherSeparatorRadioButton.setGeometry(QRect(20, 130, 92, 20))
-        self.separatorLineEdit = QLineEdit(self.separotorGroupBox)
+
+        self.horizontalLayout.addWidget(self.otherSeparatorRadioButton)
+
+        self.separatorLineEdit = QLineEdit(self.widget)
         self.separatorLineEdit.setObjectName(u"separatorLineEdit")
-        self.separatorLineEdit.setGeometry(QRect(80, 130, 31, 22))
+
+        self.horizontalLayout.addWidget(self.separatorLineEdit)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
         self.qualifierGroupBox = QGroupBox(self.centralwidget)
         self.qualifierGroupBox.setObjectName(u"qualifierGroupBox")
         self.qualifierGroupBox.setGeometry(QRect(630, 20, 161, 171))
         self.doubleQuotationmarkRadioButton = QRadioButton(self.qualifierGroupBox)
         self.doubleQuotationmarkRadioButton.setObjectName(u"doubleQuotationmarkRadioButton")
-        self.doubleQuotationmarkRadioButton.setGeometry(QRect(10, 60, 131, 20))
+        self.doubleQuotationmarkRadioButton.setGeometry(QRect(11, 57, 113, 20))
         self.quotationmarkRadioButton = QRadioButton(self.qualifierGroupBox)
         self.quotationmarkRadioButton.setObjectName(u"quotationmarkRadioButton")
-        self.quotationmarkRadioButton.setGeometry(QRect(10, 90, 141, 20))
+        self.quotationmarkRadioButton.setGeometry(QRect(11, 83, 138, 20))
         self.qualifierLineEdit = QLineEdit(self.qualifierGroupBox)
         self.qualifierLineEdit.setObjectName(u"qualifierLineEdit")
-        self.qualifierLineEdit.setGeometry(QRect(100, 120, 31, 22))
+        self.qualifierLineEdit.setGeometry(QRect(69, 118, 61, 22))
         self.otherQualifierRadioButton = QRadioButton(self.qualifierGroupBox)
         self.otherQualifierRadioButton.setObjectName(u"otherQualifierRadioButton")
-        self.otherQualifierRadioButton.setGeometry(QRect(10, 130, 61, 20))
+        self.otherQualifierRadioButton.setGeometry(QRect(12, 119, 51, 20))
         self.withoutRadioButton = QRadioButton(self.qualifierGroupBox)
         self.withoutRadioButton.setObjectName(u"withoutRadioButton")
-        self.withoutRadioButton.setGeometry(QRect(10, 30, 92, 20))
+        self.withoutRadioButton.setGeometry(QRect(11, 31, 75, 20))
         self.databaseComboBox = QComboBox(self.centralwidget)
         self.databaseComboBox.setObjectName(u"databaseComboBox")
         self.databaseComboBox.setGeometry(QRect(30, 280, 281, 24))
+        self.databaseComboBox.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.chooseDbLabel = QLabel(self.centralwidget)
         self.chooseDbLabel.setObjectName(u"chooseDbLabel")
         self.chooseDbLabel.setGeometry(QRect(30, 260, 101, 20))
@@ -189,7 +216,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.testConnectionPushButton.setText(QCoreApplication.translate("MainWindow", u"Testaa yhteys", None))
+        self.testConnectionPushButton.setText(QCoreApplication.translate("MainWindow", u"Yhdist\u00e4", None))
         self.serverLabel.setText(QCoreApplication.translate("MainWindow", u"Palvelin", None))
         self.serverLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Palvelimen nimi tai IP-sosoite", None))
         self.portLabel.setText(QCoreApplication.translate("MainWindow", u"Portti", None))
@@ -206,8 +233,8 @@ class Ui_MainWindow(object):
         self.previewLabel.setText(QCoreApplication.translate("MainWindow", u"Esikatselu", None))
         self.objectTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Objektin tyyppi", None))
         self.separotorGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Sarake-erotin ", None))
-        self.commaRadioButton.setText(QCoreApplication.translate("MainWindow", u"pilkku (,)", None))
         self.semicolonRadioButton.setText(QCoreApplication.translate("MainWindow", u"puolipiste (;)", None))
+        self.commaRadioButton.setText(QCoreApplication.translate("MainWindow", u"pilkku (,)", None))
         self.tabRadioButton.setText(QCoreApplication.translate("MainWindow", u"Sarkain", None))
         self.otherSeparatorRadioButton.setText(QCoreApplication.translate("MainWindow", u"Muu", None))
         self.separatorLineEdit.setText("")

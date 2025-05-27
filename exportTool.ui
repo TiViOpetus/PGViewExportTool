@@ -35,15 +35,20 @@
        <x>30</x>
        <y>170</y>
        <width>81</width>
-       <height>24</height>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(85, 170, 255);
 color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Testaa yhteys</string>
+      <string>Yhdistä</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
@@ -158,8 +163,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="exportPushButton">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>210</y>
+      <x>630</x>
+      <y>200</y>
       <width>161</width>
       <height>51</height>
      </rect>
@@ -210,6 +215,9 @@ color: rgb(255, 255, 255);</string>
       <height>24</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
    </widget>
    <widget class="QComboBox" name="objectNameComboBox">
     <property name="geometry">
@@ -219,6 +227,9 @@ color: rgb(255, 255, 255);</string>
       <width>301</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="objectTypeLabel">
@@ -246,76 +257,62 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Sarake-erotin </string>
     </property>
-    <widget class="QRadioButton" name="commaRadioButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>70</y>
-       <width>92</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>pilkku (,)</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="semicolonRadioButton">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>92</width>
-       <height>20</height>
+       <width>121</width>
+       <height>121</height>
       </rect>
      </property>
-     <property name="text">
-      <string>puolipiste (;)</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="tabRadioButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>92</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Sarkain</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="otherSeparatorRadioButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>130</y>
-       <width>92</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Muu</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="separatorLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>130</y>
-       <width>31</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QRadioButton" name="semicolonRadioButton">
+        <property name="text">
+         <string>puolipiste (;)</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="commaRadioButton">
+        <property name="text">
+         <string>pilkku (,)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="tabRadioButton">
+        <property name="text">
+         <string>Sarkain</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QRadioButton" name="otherSeparatorRadioButton">
+          <property name="text">
+           <string>Muu</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="separatorLineEdit">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QGroupBox" name="qualifierGroupBox">
@@ -333,9 +330,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QRadioButton" name="doubleQuotationmarkRadioButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>131</width>
+       <x>11</x>
+       <y>57</y>
+       <width>113</width>
        <height>20</height>
       </rect>
      </property>
@@ -346,9 +343,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QRadioButton" name="quotationmarkRadioButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>141</width>
+       <x>11</x>
+       <y>83</y>
+       <width>138</width>
        <height>20</height>
       </rect>
      </property>
@@ -359,9 +356,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QLineEdit" name="qualifierLineEdit">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>120</y>
-       <width>31</width>
+       <x>69</x>
+       <y>118</y>
+       <width>61</width>
        <height>22</height>
       </rect>
      </property>
@@ -369,9 +366,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QRadioButton" name="otherQualifierRadioButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>61</width>
+       <x>12</x>
+       <y>119</y>
+       <width>51</width>
        <height>20</height>
       </rect>
      </property>
@@ -382,9 +379,9 @@ color: rgb(255, 255, 255);</string>
     <widget class="QRadioButton" name="withoutRadioButton">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>92</width>
+       <x>11</x>
+       <y>31</y>
+       <width>75</width>
        <height>20</height>
       </rect>
      </property>
@@ -401,6 +398,9 @@ color: rgb(255, 255, 255);</string>
       <width>281</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="chooseDbLabel">
