@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         self.semicolonRadioButton.setText(QCoreApplication.translate("MainWindow", u"puolipiste (;)", None))
         self.tabRadioButton.setText(QCoreApplication.translate("MainWindow", u"Sarkain", None))
         self.otherSeparatorRadioButton.setText(QCoreApplication.translate("MainWindow", u"Muu", None))
-        self.separatorLineEdit.setText(QCoreApplication.translate("MainWindow", u"mmmmm", None))
+        self.separatorLineEdit.setText("")
         self.qualifierGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"Tekstin tunniste", None))
         self.doubleQuotationmarkRadioButton.setText(QCoreApplication.translate("MainWindow", u"lainausmerkit (\")", None))
         self.quotationmarkRadioButton.setText(QCoreApplication.translate("MainWindow", u"Puolilainausmerkit (')", None))

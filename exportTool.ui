@@ -314,7 +314,7 @@ color: rgb(255, 255, 255);</string>
       </rect>
      </property>
      <property name="text">
-      <string>mmmmm</string>
+      <string/>
      </property>
     </widget>
    </widget>
