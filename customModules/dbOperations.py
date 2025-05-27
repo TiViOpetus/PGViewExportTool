@@ -233,7 +233,7 @@ class DbConnection():
                 currentConnection.close() # Tuhotaan yhteys
 
 
- # Metodi tietojen lukemiseen, taulun valitut sarakkeet ainutkertaiset tiedot
+    # Metodi tietojen lukemiseen, taulun valitut sarakkeet ainutkertaiset tiedot
     def filterDistinctColumsFromTable(self, table: str, columns: list, filter:str) -> list | None:
         """Filters data from table or viwe according to filter string
 
